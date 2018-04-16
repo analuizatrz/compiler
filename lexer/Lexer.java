@@ -65,11 +65,60 @@ public class Lexer{
 		}
 
 		//end of file
-		//TODO NOT WORKINK YET
-		if((int)ch == -1) return new Token(Tag.EOF);
+		//TODO NOT WORKING YET
+		if((int)ch == 65535) return new Token(Tag.EOF);
 
 		switch(ch){
-			//operators
+			//operators and punctation
+			case ';':
+				readch();
+				return new Token(Tag.SCL);
+
+			case ':':
+				readch();
+				return new Token(Tag.TDT);
+
+			case ',':
+				readch();
+				return new Token(Tag.CMA);
+
+			case '(':
+				readch();
+				return new Token(Tag.OP);
+
+			case ')':
+				readch();
+				return new Token(Tag.CP);
+
+			case '+':
+				readch();
+				return new Token(Tag.PLS);
+
+			case '-':
+				readch();
+				return new Token(Tag.MNS);
+
+			case '*':
+				readch();
+				return new Token(Tag.MUL);
+
+			case '/':
+				if(readch('*')){// is a comment
+
+					do{
+						if((int)ch == 65535) return new Token(Tag.UEOF);
+						readch();
+					}while (ch != '*');
+
+					if(!readch('/')){
+						return new Token(Tag.UNT);
+					}
+				}
+				else{
+					readch();
+					return new Token(Tag.DIV);
+				}
+
 			case '&':
 				if (readch('&')) return Word.and;
 				else return new Token(Tag.UNT); //unexpected token
@@ -142,7 +191,6 @@ public class Lexer{
 					return new Cint(left);
 				}
 			}
-
 
 			ch = ' ';
 			return new Token(Tag.EOF);

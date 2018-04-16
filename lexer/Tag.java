@@ -57,6 +57,7 @@ public class Tag{
 	CSTRING = 300,
 
 	EOF = -1,
-	UNT = -2;
+	UNT = -2,
+	UEOF = -3;
 
 }
