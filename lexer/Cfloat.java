@@ -1,9 +1,9 @@
 package lexer;
 public class Cfloat extends Token{
 
-	public final float value;
+	public final double value;
 
-	public Cfloat(float value){
+	public Cfloat(double value){
 		super(Tag.CFLOAT);
 		this.value = value;
 	}

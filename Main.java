@@ -3,18 +3,11 @@ import lexer.Lexer;
 
 public class Main{
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		System.out.println("Hello World!");
+		String scanned = "";
 		Lexer lexer = new Lexer("test.txt");
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
-		System.out.println(lexer.scan());
+		while(!scanned.equals("-1")){
+			scanned = lexer.scan().toString();
+			System.out.println(scanned);
+		}
 	}
 }

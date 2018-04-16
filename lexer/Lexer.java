@@ -65,17 +65,18 @@ public class Lexer{
 		}
 
 		//end of file
+		//TODO NOT WORKINK YET
 		if((int)ch == -1) return new Token(Tag.EOF);
 
 		switch(ch){
 			//operators
 			case '&':
 				if (readch('&')) return Word.and;
-				break;
+				else return new Token(Tag.UNT); //unexpected token
 
 			case '|':
 				if (readch('|')) return Word.or;
-			break;
+				else return new Token(Tag.UNT); //unexpected token
 
 			case '=':
 				if (readch('=')) return Word.eq;
@@ -110,7 +111,40 @@ public class Lexer{
 			return w;
 			}
 
+			//const number
+			if(Character.isDigit(ch)){
+				int left = 0;
+				do{
+					left = 10 * left + Character.digit(ch, 10);
+					readch();
+				} while(Character.isDigit(ch));
+
+				//its a float?
+				if(ch == '.'){
+					readch(); //digit{digit}.digit{digit}
+					if(Character.isDigit(ch)){
+						int right = 0;
+						int counter = 0;
+						do{
+							right = 10 * right + Character.digit(ch, 10);
+							counter++;
+							readch();
+						} while(Character.isDigit(ch));
+						double result = (double)right/(double)Math.pow(10,counter);
+						return new Cfloat(result);
+					}
+					else{ //digit{digit}.something - return unexpected token
+						return new Token(Tag.UNT);
+					}
+
+				}
+				else{ //its an integer
+					return new Cint(left);
+				}
+			}
+
+
 			ch = ' ';
-			return new Token(Tag.UNT);
+			return new Token(Tag.EOF);
 		}
 }
