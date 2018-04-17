@@ -192,7 +192,43 @@ public class Lexer{
 				}
 			}
 
+			//const char String
+			int ascii = -1;
+			switch(ch){
+				case '\'': //char
+					readch();
+					char c = ch;
+					ascii = (int)ch;
+					if (readch('\'') && ascii < 127){ // is in ascii table?
+						return new Cchar(c);
+					}
+					else{
+						return new Token(Tag.UNT); //unexpected token
+					}
+
+				case '\"': //string
+					StringBuffer sb = new StringBuffer();
+
+					do{
+						readch();
+						ascii = (int)ch;
+						if(ascii < 127 && ! (ch == '\t' || ch == '\r'//refactor into a function
+							|| ch == '\b' || ch == '\n')){ // is in ascii table?
+							if(ch != '\"'){
+							 sb.append(ch);
+						 }
+						}
+						else{
+							return new Token(Tag.UNT); //unexpected token
+						}
+					} while(ch != '\"');
+					readch(); //advance to next char
+					String s = sb.toString();
+					return new Cstring(s);
+
+			}
+
 			ch = ' ';
-			return new Token(Tag.EOF);
+			return new Token(Tag.UNT);
 		}
 }

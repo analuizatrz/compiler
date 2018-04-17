@@ -2,4 +2,9 @@ if < =
 != = & opa
 /* ISTO É UM COMENTÁRIO
 AQUI TAMBÉM*/
-1-50; 2. 0.12345678
+1-50; 2. 0.12345678 id1
+'c' && "uma string" id1
+""
+23
+"
+begin
