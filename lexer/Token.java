@@ -1,14 +1,14 @@
 package lexer;
 public class Token{
-	
-	public final int tag;	
 
-	public Token(int t){
+	public final Tag tag;
+
+	public Token(Tag t){
 		tag = t;
 	}
 
 	public String toString(){
-		return "" + tag;
+		return "" + tag.toString();
 	}
 
 }

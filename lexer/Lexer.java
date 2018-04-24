@@ -61,11 +61,25 @@ public class Lexer{
 		for(;; readch()){
 			if (ch == ' ' || ch == '\t' || ch == '\r' || ch == '\b' ) continue;
 			else if (ch == '\n') line++;
+			else if(ch == '/'){
+				if(readch('*')){// is a comment
+
+					do{
+						if((int)ch == 65535) return new Token(Tag.UEOF); //65535 it means EOF
+						if (ch == '\n') line++; //compute new line in comments
+						readch();
+					}while (ch != '*');
+
+					if(!readch('/')){
+						return new Token(Tag.MFT);
+					}
+				}
+				continue;
+			}
 			else break;
 		}
 
 		//end of file
-		//TODO NOT WORKING YET
 		if((int)ch == 65535) return new Token(Tag.EOF);
 
 		switch(ch){
@@ -103,29 +117,19 @@ public class Lexer{
 				return new Token(Tag.MUL);
 
 			case '/':
-				if(readch('*')){// is a comment
 
-					do{
-						if((int)ch == 65535) return new Token(Tag.UEOF);
-						readch();
-					}while (ch != '*');
 
-					if(!readch('/')){
-						return new Token(Tag.UNT);
-					}
-				}
-				else{
 					readch();
 					return new Token(Tag.DIV);
-				}
+
 
 			case '&':
 				if (readch('&')) return Word.and;
-				else return new Token(Tag.UNT); //unexpected token
+				else return new Token(Tag.MFT); //invalid token
 
 			case '|':
 				if (readch('|')) return Word.or;
-				else return new Token(Tag.UNT); //unexpected token
+				else return new Token(Tag.MFT); //invalid token
 
 			case '=':
 				if (readch('=')) return Word.eq;
@@ -182,8 +186,8 @@ public class Lexer{
 						double result = (double)right/(double)Math.pow(10,counter);
 						return new Cfloat(result);
 					}
-					else{ //digit{digit}.something - return unexpected token
-						return new Token(Tag.UNT);
+					else{ //digit{digit}.something - return invalid token
+						return new Token(Tag.MFT);
 					}
 
 				}
@@ -203,7 +207,7 @@ public class Lexer{
 						return new Cchar(c);
 					}
 					else{
-						return new Token(Tag.UNT); //unexpected token
+						return new Token(Tag.MFT); //invalid token
 					}
 
 				case '\"': //string
@@ -219,7 +223,7 @@ public class Lexer{
 						 }
 						}
 						else{
-							return new Token(Tag.UNT); //unexpected token
+							return new Token(Tag.MFT); //invalid token
 						}
 					} while(ch != '\"');
 					readch(); //advance to next char
@@ -229,6 +233,6 @@ public class Lexer{
 			}
 
 			ch = ' ';
-			return new Token(Tag.UNT);
+			return new Token(Tag.MFT);
 		}
 }

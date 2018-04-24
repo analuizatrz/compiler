@@ -10,7 +10,7 @@ public class Word extends Token{
 	public static final Word le = new Word ("<=", Tag.LE);
 	public static final Word ge = new Word (">=", Tag.GE);
 
-	public Word(String s, int tag){
+	public Word(String s, Tag tag){
 		super(tag);
 		this.lexeme = s;
 	}
@@ -20,7 +20,7 @@ public class Word extends Token{
 	}
 
 	public String toString(){
-		return ""+lexeme;
+		return "<"+tag+", "+lexeme+">";
 	}
 
 }

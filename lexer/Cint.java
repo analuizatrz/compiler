@@ -9,6 +9,6 @@ public class Cint extends Token{
 	}
 
 	public String toString(){
-		return "" + value;
+		return "<"+tag+", "+value+">";
 	}
 }
