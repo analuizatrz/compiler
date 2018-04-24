@@ -73,8 +73,12 @@ public class Lexer{
 					if(!readch('/')){
 						return new Token(Tag.MFT);
 					}
+					continue;
 				}
-				continue;
+				else{
+					ch = '/';
+					break;
+				}
 			}
 			else break;
 		}

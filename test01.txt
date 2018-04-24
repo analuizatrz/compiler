@@ -1,4 +1,5 @@
-program
+programa teste1
+
   a, b: int;
   result : int;
   a,x : float;
