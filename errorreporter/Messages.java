@@ -12,6 +12,13 @@ public class Messages{
         put(Tag.MFT, "Lexema mal formado");
 
     }};
+
+    // public Messages(){
+    //   this.dictionary = new Hashtable<Tag, String>();
+    //   this.dictionary.put(Tag.UEOF, "Fim de arquivo inesperado");
+    //   this.dictionary.put(Tag.MFT, "Lexema mal formado");
+    // }
+
     public String get(Tag tag){
         return dictionary.get(tag);
     }

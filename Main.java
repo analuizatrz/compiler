@@ -28,13 +28,11 @@ public class Main extends Reportable{
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		// lexerAnalisys(args[0]);
 		Main m = new Main();
-		m.addMessage(Tag.EOF, 3);
+		m.addMessage(Tag.UEOF, 3);
 
 		for (String message : m.messages) {
 			System.out.println(message);
 		}
-		Messages oi = new Messages();
-		// oi.get(Tag.UEOF);
 
 
 	}
