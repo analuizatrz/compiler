@@ -13,6 +13,10 @@ public class Lexer extends Reportable{
 
 	private Hashtable<String, Token> words = new Hashtable<String, Token>();
 
+	public Hashtable<String, Token> getWords(){
+		return this.words;
+	}
+
 	private void reserve(Word w){
 		this.words.put(w.getLexeme(), w);
 	}
