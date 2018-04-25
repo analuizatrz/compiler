@@ -1,10 +1,12 @@
 package lexer;
 import java.io.*;
 import java.util.*;
+
+import errorreporter.Reportable;
 import lexer.Tag;
 import lexer.Word;
 
-public class Lexer{
+public class Lexer extends Reportable{
 	public static int line = 1;
 	public char ch = ' ';
 	private FileReader file;
@@ -65,12 +67,16 @@ public class Lexer{
 				if(readch('*')){// is a comment
 
 					do{
-						if((int)ch == 65535) return new Token(Tag.UEOF); //65535 it means EOF
+						if((int)ch == 65535){
+							addMessage(Tag.UEOF, line);
+							return new Token(Tag.UEOF); //65535 it means EOF
+						}
 						if (ch == '\n') line++; //compute new line in comments
 						readch();
 					}while (ch != '*');
 
 					if(!readch('/')){
+						addMessage(Tag.MFT, line);
 						return new Token(Tag.MFT);
 					}
 					continue;
@@ -191,6 +197,7 @@ public class Lexer{
 						return new Cfloat(result);
 					}
 					else{ //digit{digit}.something - return invalid token
+						addMessage(Tag.MFT, line);
 						return new Token(Tag.MFT);
 					}
 
@@ -211,6 +218,7 @@ public class Lexer{
 						return new Cchar(c);
 					}
 					else{
+						addMessage(Tag.MFT, line);
 						return new Token(Tag.MFT); //invalid token
 					}
 
@@ -227,6 +235,7 @@ public class Lexer{
 						 }
 						}
 						else{
+							addMessage(Tag.MFT, line);
 							return new Token(Tag.MFT); //invalid token
 						}
 					} while(ch != '\"');
@@ -237,6 +246,7 @@ public class Lexer{
 			}
 
 			ch = ' ';
+			addMessage(Tag.MFT, line);
 			return new Token(Tag.MFT);
 		}
 }

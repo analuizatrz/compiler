@@ -1,21 +1,41 @@
 import java.io.*;
+
+import errorreporter.Reportable;
+import errorreporter.*;
 import lexer.Lexer;
 import lexer.Token;
 import lexer.Tag;
 
-public class Main{
-	public static void main(String[] args) throws FileNotFoundException, IOException {
+public class Main extends Reportable{
+	public static  void lexerAnalisys(String fileName)throws FileNotFoundException, IOException{
 		Token scanned;
 		int currentLine = 1;
-		Lexer lexer = new Lexer(args[0]);
+		Lexer lexer = new Lexer(fileName);
 		do{
 			scanned = lexer.scan();
-			if (lexer.line != currentLine) {
+			if (Lexer.line != currentLine) {
 				System.out.println("");
-				currentLine = lexer.line;
+				currentLine = Lexer.line;
 			}
 			System.out.print(scanned + " ");
 		}while(scanned.tag != Tag.EOF);
 		System.out.println("");
+
+		for (String message : lexer.messages) {
+			System.out.println(message);
+		}
+	}
+	public static void main(String[] args) throws FileNotFoundException, IOException {
+		// lexerAnalisys(args[0]);
+		Main m = new Main();
+		m.addMessage(Tag.EOF, 3);
+
+		for (String message : m.messages) {
+			System.out.println(message);
+		}
+		Messages oi = new Messages();
+		// oi.get(Tag.UEOF);
+
+
 	}
 }
