@@ -197,7 +197,7 @@ public class Lexer extends Reportable{
 							counter++;
 							readch();
 						} while(Character.isDigit(ch));
-						double result = (double)right/(double)Math.pow(10,counter);
+						double result = (double)left + (double)right/(double)Math.pow(10,counter);
 						return new Cfloat(result);
 					}
 					else{ //digit{digit}.something - return invalid token

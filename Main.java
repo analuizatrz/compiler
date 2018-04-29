@@ -22,7 +22,7 @@ public class Main extends Reportable{
 				currentLine = Lexer.line;
 			}
 			System.out.print(scanned + " ");
-		}while(scanned.tag != Tag.EOF && scanned.tag != Tag.MFT && scanned.tag != Tag.UEOF); //interrupt if detect error or EOF
+		}while(scanned.tag != Tag.EOF); //&& scanned.tag != Tag.MFT && scanned.tag != Tag.UEOF); //interrupt if detect error or EOF
 
 		System.out.println("");
 		if(lexer.getWords().size() > 0 ) System.out.println("\n======Tabela de Símbolos======");
