@@ -1,12 +1,13 @@
 program teste6
     declare
-        first, second : int;
+        first, second, n : int;
     begin
         first=1;
         second=1;
         out(first)
         out(second)
-        while(first < 10)
+        in(n)
+        while(first <= n)
             first = second + first
             second = second + first
             out(first)

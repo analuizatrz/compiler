@@ -6,7 +6,7 @@ import lexer.Lexer;
 import lexer.Token;
 import lexer.Tag;
 
-public class Main extends Reportable{
+public class Compiler extends Reportable{
 	public static void printSymbolTable(Lexer lexer){
 		System.out.println("");
 		if(lexer.getWords().size() > 0 ) System.out.println("\n======Tabela de Símbolos======");
@@ -39,7 +39,9 @@ public class Main extends Reportable{
 			}
 			System.out.print(scanned + " ");
 		}while(scanned.tag != Tag.EOF /*&& scanned.tag != Tag.MFT && scanned.tag != Tag.UEOF*/); //interrupt if detect error or EOF
+		printSymbolTable(lexer);
 		printErrors(lexer);
+
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		 lexerAnalisys(args[0]);
