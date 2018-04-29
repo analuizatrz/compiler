@@ -1,0 +1,23 @@
+program teste7
+/* combinações de três dados 
+que somados dao n*/
+    declare
+        i,j,k,n : int
+    begin
+        in(n)
+        while(i <= 6) do
+            while(j <= 6) do
+                while(k <= 6) do
+                    if(i+j+k == n)
+                        out("1")
+                        out(i)
+                        out(j)
+                        out(k)
+                        out("-----")
+                k = k + 1;
+                end
+            j = j + 1;
+            end
+        i = i + 1;
+        end
+    end

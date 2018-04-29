@@ -6,11 +6,16 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "rm *.class; rm lexer/*.class; javac Main.java; java Main test.txt ",
+            "command": "rm *.class; rm lexer/*.class; javac Main.java; java Main tests/test07.txt ",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "clear",
+            "type": "shell",
+            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; ",
         }
     ]
 }
