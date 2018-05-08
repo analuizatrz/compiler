@@ -44,6 +44,10 @@ public class Compiler extends Reportable{
 		printErrors(lexer);
 
 	}
+	public static  void parserAnalisys(String fileName)throws FileNotFoundException, IOException{
+		Lexer lexer = new Lexer(fileName);
+		Parser parser = new Parser(lexer);
+	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		 lexerAnalisys(args[0]);
 	}

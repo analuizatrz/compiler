@@ -5,14 +5,14 @@ import errorreporter.Reportable;
 import lexer.Lexer;
 import lexer.Tag;
 import lexer.Token;
+import java.util.*;
+import java.lang.*;
+import java.io.*;
 
 public class Parser extends Reportable{
     private Token token;
     private Lexer lexer;
 
-    // public Parser(string filename) throws java.io.IOException{
-    //     lexer = new Lexer(filename);
-    // }
     public Parser(Lexer lexer){
         this.lexer = lexer;
     }
@@ -23,39 +23,113 @@ public class Parser extends Reportable{
         if(token.tag == tag)
             advance();
         else
+            error();
+    }
+    void error(){
+        if(token.tag == Tag.EOF)
+            addMessage(ErrorType.UEOF, Lexer.line);
+        else
             addMessage(ErrorType.UNT, Lexer.line);
     }
-
-
-}
-
-/*
-Do slide ;)
-
-int tok = getToken(); //lê primeiro token
-
-void advance(){
-    tok = getToken();   //lê próximo token
-}
-
-void eat(int t){
-    if(tok==t) advance();
-    else
-        error();
-}
-
-void S(){
-    switch(tok){
-        //S → if E then S else S 
-        case IF: eat(IF); E(); eat(THEN); S();eat(ELSE); S(); break;
+    void program() throws java.io.IOException {
+        switch(token.tag){
+            //program ::= program identifier body  
+            case PROGRAM: eat(Tag.PROGRAM); eat(Tag.ID); body(); break;           
+            default: 
+                error();
+        }
+    }
+    void body(){
         
-        //S → begin S L 
-        case BEGIN: eat(BEGIN); S(); L(); break;
+    }
+    void decl_list(){
         
-        // S → print E
-        case PRINT: eat(PRINT); E(); break;
+    }
+    void decl_list_(){
         
-        default: error();
+    }
+    void decl(){
+        
+    }
+    void ident_list(){
+        
+    }
+    void type(){
+
+    }
+    void stmt_list(){
+
+    }
+    void stmt(){
+
+    }
+    void assign_stmt(){
+
+    }
+    void if_stmt(){
+
+    }
+    void if_stmt_(){
+
+    }
+    void condfition(){
+
+    }
+    void repeat_stmt(){
+
+    }
+    void stmt_suffix(){
+
+    }
+    void while_stmt(){
+
+    }
+    void stmt_preffix(){
+
+    }
+    void read_stmt(){
+
+    }
+    void write_stmt(){
+
+    }
+    void writeable(){
+
+    }
+    void expression(){
+
+    }
+    void expression_(){
+
+    }
+    void simple_expr(){
+
+    }
+    void simple_expr_(){
+
+    }
+    void term(){
+
+    }
+    void term_(){
+
+    }
+    void factor_a(){
+
+    }
+    void factor(){
+
+    }
+    void relop(){
+
+    }
+    void addop(){
+
+    }
+    void mulop(){
+
+    }
+    void constant(){
+
     }
 }
-*/

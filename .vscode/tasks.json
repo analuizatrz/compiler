@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; javac Compiler.java; java Compiler parser_tests/test05.txt ",
+            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; rm parser/*.class; javac Compiler.java; java Compiler parser_tests/test05.txt ",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -15,7 +15,7 @@
         {
             "label": "clear",
             "type": "shell",
-            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; ",
+            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; rm parser/*.class; ",
             "problemMatcher": []
         }
     ]

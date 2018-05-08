@@ -1,0 +1,65 @@
+program ::= program identifier body 
+body::= declare decl-list begin stmt-list end
+body::= begin stmt-list end
+decl-list ::= decl decl-list'
+decl-list' ::= ";" decl decl-list'
+decl-list' ::= λ
+decl ::= ident-list":" type
+ident-list ::= identifier ident-list'
+ident-list' ::= "," identifier ident-list'
+ident-list' ::= λ
+type ::= int
+type ::= float
+type ::= char
+stmt-list ::= stmt stmt-list'
+stmt-list' ::= ";" stmt stmt-list'
+stmt-list' ::= λ
+stmt  ::= assign-stmt
+stmt  ::= if-stmt
+stmt  ::= while-stmt
+stmt  ::= repeat-stmt
+stmt  ::= read-stmt
+stmt  ::= write-stmt
+assign-stmt ::= identifier "=" simple_expr
+if-stmt ::= if condition then stmt-list if-stmt'
+if-stmt' ::= end
+if-stmt' ::= else stmt-list end
+condition ::= expression
+repeat-stmt ::= repeat  stmt-list stmt-suffix
+stmt-suffix ::= until condition
+while-stmt ::= stmt-prefix stmt-list end
+stmt-prefix ::= while condition do
+read-stmt ::= in"(" identifier")"
+write-stmt ::= out"("writable ")"
+writable ::= simple-expr
+writable ::= literal
+expression ::= simple-expr expression'
+expression' ::= relop simple-expr
+expression' ::= λ 
+simple-expr ::= term simple-expr'
+simple-expr' ::= addop term simple-expr'
+simple-expr' ::= λ
+term ::= factor-a term'
+term' ::= mulop factor-a term'
+term' ::= λ
+fator-a ::= factor
+fator-a ::= !factor
+fator-a ::= "-" factor
+factor ::= identifier
+factor ::= constant
+factor ::= "(" expression ")"
+relop ::= "=="
+relop ::= ">"
+relop ::= ">="
+relop ::= "<"
+relop ::= "<="
+relop ::= "!="
+addop ::= "+"
+addop ::= "-"
+addop ::= ||
+mulop ::= "*"
+mulop ::= "/"
+mulop ::= &&
+constant ::= integer_const
+constant ::= float_const
+constant ::= char_const
