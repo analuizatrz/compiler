@@ -1,0 +1,16 @@
+program teste6
+    declare
+        first, second, n : int;
+    begin
+        first=1;
+        second=1;
+        out(first)
+        out(second)
+        in(n)
+        while(first <= n)
+            first = second + first
+            second = second + first
+            out(first)
+            out(second)
+        end
+    end
