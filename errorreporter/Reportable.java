@@ -9,7 +9,7 @@ public abstract class Reportable{
     public List<String> messages = new ArrayList<String>();
     private Messages template = new Messages();
 
-    public void addMessage(Tag tag, int line){
+    public void addMessage(ErrorType tag, int line){
         messages.add(template.get(tag)+" na linha: "+line);
     }
 }

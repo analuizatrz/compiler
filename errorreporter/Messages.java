@@ -5,16 +5,17 @@ import java.util.Hashtable;
 import errorreporter.Messages;
 public class Messages{
 
-    public Hashtable<Tag, String> dictionary = new Hashtable<Tag, String>(){
+    public Hashtable<ErrorType, String> dictionary = new Hashtable<ErrorType, String>(){
     {
         //erros lexicos
-        put(Tag.UEOF, "Fim de arquivo inesperado");
-        put(Tag.MFT, "Lexema mal formado");
+        put(ErrorType.UEOF, "Fim de arquivo inesperado");
+        put(ErrorType.MFT, "Lexema mal formado");
+        put(ErrorType.UNT, "Token inesperado");
 
     }};
 
-    public String get(Tag tag){
-        return dictionary.get(tag);
+    public String get(ErrorType errorType){
+        return dictionary.get(errorType);
     }
 
 }

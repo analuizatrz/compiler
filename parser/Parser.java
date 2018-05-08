@@ -1,10 +1,37 @@
+import lexer.Lexer;
+import lexer.Tag;
+import lexer.Token;
+
+public class Parser extends Reportable{
+    private Token token;
+    private Lexer lexer;
+
+    public Parser(string filename){
+        lexer = new Lexer(filename);
+    }
+    public Parser(Lexer lexer){
+        this.lexer = lexer;
+        
+    }
+    void advance(){
+        token = lexer.scan();
+    }
+    void eat(Tag tag){
+        if(token.tag == tag) advance();
+        else{
+            
+        }
+    }
+
+}
+
 /*
 Do slide ;)
 
-int tok= getToken(); //lê primeiro token
+int tok = getToken(); //lê primeiro token
 
 void advance(){
-    tok= getToken();   //lê próximo token
+    tok = getToken();   //lê próximo token
 }
 
 void eat(int t){

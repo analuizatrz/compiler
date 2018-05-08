@@ -2,6 +2,7 @@ package lexer;
 import java.io.*;
 import java.util.*;
 
+import errorreporter.ErrorType;
 import errorreporter.Reportable;
 import lexer.Tag;
 import lexer.Word;
@@ -72,7 +73,7 @@ public class Lexer extends Reportable{
 
 					do{
 						if((int)ch == 65535){
-							addMessage(Tag.UEOF, line);
+							addMessage(ErrorType.UEOF, line);
 							return new Token(Tag.UEOF); //65535 it means EOF
 						}
 						if (ch == '\n') line++; //compute new line in comments
@@ -80,7 +81,7 @@ public class Lexer extends Reportable{
 					}while (ch != '*');
 
 					if(!readch('/')){
-						addMessage(Tag.MFT, line);
+						addMessage(ErrorType.MFT, line);
 						return new Token(Tag.MFT);
 					}
 					continue;
@@ -201,7 +202,7 @@ public class Lexer extends Reportable{
 						return new Cfloat(result);
 					}
 					else{ //digit{digit}.something - return invalid token
-						addMessage(Tag.MFT, line);
+						addMessage(ErrorType.MFT, line);
 						return new Token(Tag.MFT);
 					}
 
@@ -222,7 +223,7 @@ public class Lexer extends Reportable{
 						return new Cchar(c);
 					}
 					else{
-						addMessage(Tag.MFT, line);
+						addMessage(ErrorType.MFT, line);
 						return new Token(Tag.MFT); //invalid token
 					}
 
@@ -239,7 +240,7 @@ public class Lexer extends Reportable{
 						 }
 						}
 						else{
-							addMessage(Tag.MFT, line);
+							addMessage(ErrorType.MFT, line);
 							return new Token(Tag.MFT); //invalid token
 						}
 					} while(ch != '\"');
@@ -250,7 +251,7 @@ public class Lexer extends Reportable{
 			}
 
 			ch = ' ';
-			addMessage(Tag.MFT, line);
+			addMessage(ErrorType.MFT, line);
 			return new Token(Tag.MFT);
 		}
 }
