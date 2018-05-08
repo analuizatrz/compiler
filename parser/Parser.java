@@ -1,3 +1,7 @@
+package parser;
+
+import errorreporter.ErrorType;
+import errorreporter.Reportable;
 import lexer.Lexer;
 import lexer.Tag;
 import lexer.Token;
@@ -11,7 +15,6 @@ public class Parser extends Reportable{
     }
     public Parser(Lexer lexer){
         this.lexer = lexer;
-        
     }
     void advance(){
         token = lexer.scan();
@@ -19,9 +22,10 @@ public class Parser extends Reportable{
     void eat(Tag tag){
         if(token.tag == tag) advance();
         else{
-            
+            addMessage(ErrorType.UNT, Lexer.line);
         }
     }
+
 
 }
 

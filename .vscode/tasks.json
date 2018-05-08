@@ -16,6 +16,7 @@
             "label": "clear",
             "type": "shell",
             "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; ",
+            "problemMatcher": []
         }
     ]
 }

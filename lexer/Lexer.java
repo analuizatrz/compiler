@@ -140,11 +140,17 @@ public class Lexer extends Reportable{
 
 			case '&':
 				if (readch('&')) return Word.and;
-				else return new Token(Tag.MFT); //invalid token
+				else{
+					addMessage(ErrorType.MFT, line);
+					return new Token(Tag.MFT); //invalid token
+				}
 
 			case '|':
 				if (readch('|')) return Word.or;
-				else return new Token(Tag.MFT); //invalid token
+				else{
+					addMessage(ErrorType.MFT, line);
+					return new Token(Tag.MFT); //invalid token
+				}
 
 			case '=':
 				if (readch('=')) return Word.eq;
