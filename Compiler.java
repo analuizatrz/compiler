@@ -5,6 +5,7 @@ import errorreporter.*;
 import lexer.Lexer;
 import lexer.Token;
 import lexer.Tag;
+import parser.Parser;
 
 public class Compiler extends Reportable{
 	public static void printSymbolTable(Lexer lexer){

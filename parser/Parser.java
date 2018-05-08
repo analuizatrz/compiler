@@ -10,20 +10,20 @@ public class Parser extends Reportable{
     private Token token;
     private Lexer lexer;
 
-    public Parser(string filename){
-        lexer = new Lexer(filename);
-    }
+    // public Parser(string filename) throws java.io.IOException{
+    //     lexer = new Lexer(filename);
+    // }
     public Parser(Lexer lexer){
         this.lexer = lexer;
     }
-    void advance(){
+    void advance() throws java.io.IOException {
         token = lexer.scan();
     }
-    void eat(Tag tag){
-        if(token.tag == tag) advance();
-        else{
+    void eat(Tag tag) throws java.io.IOException {
+        if(token.tag == tag)
+            advance();
+        else
             addMessage(ErrorType.UNT, Lexer.line);
-        }
     }
 
 
