@@ -1,7 +1,7 @@
 program ::= program identifier body 
 body::= [declare decl-list] begin stmt-list end
 decl-list ::= decl {";" decl}
-decl ::= ident-list":" type
+decl ::= ident-list ":" type
 ident-list ::= identifier {"," identifier}
 type ::= int| float| char
 stmt-list ::= stmt {";" stmt}
@@ -23,7 +23,7 @@ simple-expr ::= term simple-expr'
 simple-expr' ::= addop term simple-expr' | λ
 term ::= factor-a term'
 term' ::= mulop factor-a term' | λ
-fator-a ::= factor | !factor | "-" factor
+factor-a ::= factor | !factor | "-" factor
 factor ::= identifier | constant | "(" expression ")"
 relop ::= "==" | ">" | ">=" | "<" | "<=" | "!="
 addop ::= "+" | "-" | ||

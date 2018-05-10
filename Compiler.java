@@ -7,7 +7,7 @@ import lexer.Token;
 import lexer.Tag;
 import parser.*;
 
-public class Compiler extends Reportable{
+public class Compiler {
 	public static void printSymbolTable(Lexer lexer){
 		System.out.println("");
 		if(lexer.getWords().size() > 0 ) System.out.println("\n======Tabela de Símbolos======");
@@ -16,7 +16,6 @@ public class Compiler extends Reportable{
     		System.out.println(value);
 		}
 	}
-
 	public static void lexerAnalisys(String fileName) throws FileNotFoundException, IOException{
 		Token scanned;
 		int currentLine = 1;
@@ -41,9 +40,7 @@ public class Compiler extends Reportable{
 		Lexer lexer = new Lexer(fileName);
 		Parser parser = new Parser(lexer);
 		if(lexer.listErrors() == 0 && parser.listErrors() == 0)
-			System.out.println("Nenhum erro foi detectado, tokens identificados com sucesso");
-
-
+			System.out.println("Nenhum erro foi detectado");
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		//lexerAnalisys(args[0]);
