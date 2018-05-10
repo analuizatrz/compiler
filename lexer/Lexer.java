@@ -173,6 +173,12 @@ public class Lexer extends Reportable{
 		if (Character.isLetter(ch)) {
 			StringBuffer sb = new StringBuffer();
 			do{
+				int ascii = (int)ch;
+				if(ascii > 127){
+					readch();
+					addMessage(Tag.MFT, line);
+					return new Token(Tag.MFT); //invalid token
+				}
 				sb.append(ch);
 				readch();
 			} while(Character.isLetterOrDigit(ch) || ch == '_');
@@ -204,7 +210,7 @@ public class Lexer extends Reportable{
 							counter++;
 							readch();
 						} while(Character.isDigit(ch));
-						double result = (double)right/(double)Math.pow(10,counter);
+						double result = (double)left + (double)right/(double)Math.pow(10,counter);
 						return new Cfloat(result);
 					}
 					else{ //digit{digit}.something - return invalid token
@@ -225,7 +231,7 @@ public class Lexer extends Reportable{
 					readch();
 					char c = ch;
 					ascii = (int)ch;
-					if (readch('\'') && ascii < 127){ // is in ascii table?
+					if (readch('\'') && ascii <= 127){ // is in ascii table?
 						return new Cchar(c);
 					}
 					else{
