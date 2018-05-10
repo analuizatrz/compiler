@@ -43,31 +43,57 @@ public class Parser extends Reportable{
                 error();
         }
     }
-    void body()throws IOException {
+    void body() throws IOException {
         switch(token.tag){
-            ////body::= [declare decl-list] begin stmt-list end 
-            case DECLARE: eat(Tag.PROGRAM); eat(Tag.ID);
-            case BEGIN: eat(Tag.BEGIN); eat(Tag.END); break;     
+            //body ::= [declare decl-list] begin stmt-list end 
+            case DECLARE: eat(Tag.PROGRAM); decl_list();;
+            case BEGIN: eat(Tag.BEGIN); stmt_list(); eat(Tag.END);
+            break;
             default: 
                 error();
         }
-        
-        
     }
-    void decl_list(){
-        
+    void decl_list() throws IOException {
+        switch(token.tag){
+            //decl-list ::= decl {";" decl} 
+            case ID: decl(); 
+                while(token.tag == Tag.SCL){
+                    eat(Tag.SCL); decl();
+                }
+                break;
+            default: 
+                error();
+        }
     }
-    void decl_list_(){
-        
+    void decl() throws IOException {
+        switch(token.tag){
+            // decl ::= ident-list ":" type
+            case ID: ident_list(); eat(Tag.TDT); type(); break;
+            default: 
+                error();
+        }
     }
-    void decl(){
-        
+    void ident_list() throws IOException {
+        switch(token.tag){
+            // ident-list ::= identifier {"," identifier}
+            case ID: eat(Tag.ID);
+                while(token.tag == Tag.CMA){
+                    eat(Tag.CMA); eat(Tag.ID);
+                }
+                break;
+            default: 
+                error();
+        }
     }
-    void ident_list(){
-        
-    }
-    void type(){
-
+    void type() throws IOException {
+        switch(token.tag){
+            // type ::= int | float | char
+            case CINT: eat(Tag.INT); break;
+            case CFLOAT: eat(Tag.CFLOAT); break;
+            case CCHAR: eat(Tag.CCHAR); break;
+            default: 
+                error();
+        }
     }
     void stmt_list(){
 

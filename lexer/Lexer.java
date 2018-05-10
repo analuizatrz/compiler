@@ -176,7 +176,7 @@ public class Lexer extends Reportable{
 				int ascii = (int)ch;
 				if(ascii > 127){
 					readch();
-					addMessage(Tag.MFT, line);
+					addMessage(ErrorType.MFT, line);
 					return new Token(Tag.MFT); //invalid token
 				}
 				sb.append(ch);

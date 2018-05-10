@@ -5,7 +5,7 @@ decl ::= ident-list":" type
 ident-list ::= identifier {"," identifier}
 type ::= int| float| char
 stmt-list ::= stmt {";" stmt}
-stmt  ::= assign-stmt | if-stmt | while-stmt | repeat-stmt | read-stmt | write-stmt
+stmt ::= assign-stmt | if-stmt | while-stmt | repeat-stmt | read-stmt | write-stmt
 assign-stmt ::= identifier "=" simple_expr
 if-stmt ::= if condition then stmt-list if-stmt'
 if-stmt' ::= end | else stmt-list end
