@@ -1,5 +1,5 @@
 program ::= program identifier body 
-body::= [declaredecl-list] beginstmt-list end
+body::= [declare decl-list] begin stmt-list end
 decl-list ::= decl {";" decl}
 decl ::= ident-list":" type
 ident-list ::= identifier {"," identifier}

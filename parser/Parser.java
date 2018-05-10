@@ -13,25 +13,29 @@ public class Parser extends Reportable{
     private Token token;
     private Lexer lexer;
 
-    public Parser(Lexer lexer){
-        this.lexer = lexer;
+    public Parser(Lexer lexer) throws IOException  {
+            this.lexer = lexer;
+            advance();
+            eat(Tag.END);
+      
     }
-    void advance() throws java.io.IOException {
+    void advance() throws IOException{
         token = lexer.scan();
     }
-    void eat(Tag tag) throws java.io.IOException {
+    void eat(Tag tag) throws IOException {
         if(token.tag == tag)
             advance();
         else
             error();
     }
     void error(){
+        System.out.println("erro");
         if(token.tag == Tag.EOF)
             addMessage(ErrorType.UEOF, Lexer.line);
         else
             addMessage(ErrorType.UNT, Lexer.line);
     }
-    void program() throws java.io.IOException {
+    void program() throws IOException {
         switch(token.tag){
             //program ::= program identifier body  
             case PROGRAM: eat(Tag.PROGRAM); eat(Tag.ID); body(); break;           
@@ -39,7 +43,15 @@ public class Parser extends Reportable{
                 error();
         }
     }
-    void body(){
+    void body()throws IOException {
+        switch(token.tag){
+            ////body::= [declare decl-list] begin stmt-list end 
+            case DECLARE: eat(Tag.PROGRAM); eat(Tag.ID);
+            case BEGIN: eat(Tag.BEGIN); eat(Tag.END); break;     
+            default: 
+                error();
+        }
+        
         
     }
     void decl_list(){

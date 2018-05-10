@@ -5,7 +5,7 @@ import errorreporter.*;
 import lexer.Lexer;
 import lexer.Token;
 import lexer.Tag;
-import parser.Parser;
+import parser.*;
 
 public class Compiler extends Reportable{
 	public static void printSymbolTable(Lexer lexer){
@@ -25,7 +25,7 @@ public class Compiler extends Reportable{
 			System.out.println(message);
 		}
 	}
-	public static  void lexerAnalisys(String fileName)throws FileNotFoundException, IOException{
+	public static void lexerAnalisys(String fileName)throws FileNotFoundException, IOException{
 		Token scanned;
 		int currentLine = 1;
 		Lexer lexer = new Lexer(fileName);
@@ -44,11 +44,12 @@ public class Compiler extends Reportable{
 		printErrors(lexer);
 
 	}
-	public static  void parserAnalisys(String fileName)throws FileNotFoundException, IOException{
+	public static void parserAnalisys(String fileName)throws FileNotFoundException, IOException{
 		Lexer lexer = new Lexer(fileName);
 		Parser parser = new Parser(lexer);
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		 lexerAnalisys(args[0]);
+		// lexerAnalisys(args[0]);
+		parserAnalisys(args[0]);
 	}
 }

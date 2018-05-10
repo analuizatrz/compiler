@@ -1,6 +1,6 @@
 program ::= program identifier body 
 body::= declare decl-list begin stmt-list end
-body::= begin stmt-list end
+body'::= begin stmt-list end
 decl-list ::= decl decl-list'
 decl-list' ::= ";" decl decl-list'
 decl-list' ::= λ
