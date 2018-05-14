@@ -39,6 +39,7 @@ public class Compiler {
 	public static void parserAnalisys(String fileName)throws FileNotFoundException, IOException{
 		Lexer lexer = new Lexer(fileName);
 		Parser parser = new Parser(lexer);
+		parser.start();
 		if(lexer.listErrors() == 0 && parser.listErrors() == 0)
 			System.out.println("Nenhum erro foi detectado");
 	}

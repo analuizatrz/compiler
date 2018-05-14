@@ -27,11 +27,16 @@ public class Parser extends Reportable{
         else
             error();
     }
-    void error(){
+    public void start() throws IOException{
+        program();
+    }
+    void error() throws IOException{
+        System.out.println(token);
         if(token.tag == Tag.EOF)
             addMessage(ErrorType.UEOF, Lexer.line);
         else
             addMessage(ErrorType.UNT, Lexer.line);
+        advance();
     }
     void program() throws IOException {
         switch(token.tag){
@@ -43,7 +48,7 @@ public class Parser extends Reportable{
     void body() throws IOException {
         switch(token.tag){
             // body ::= [declare decl-list] begin stmt-list end 
-            case DECLARE: eat(Tag.PROGRAM); decl_list();;
+            case DECLARE: eat(Tag.DECLARE); decl_list();;
             case BEGIN: eat(Tag.BEGIN); stmt_list(); eat(Tag.END);
             break;
             default: error();
@@ -81,9 +86,9 @@ public class Parser extends Reportable{
     void type() throws IOException {
         switch(token.tag){
             // type ::= int | float | char
-            case CINT: eat(Tag.INT); break;
-            case CFLOAT: eat(Tag.CFLOAT); break;
-            case CCHAR: eat(Tag.CCHAR); break;
+            case INT: eat(Tag.INT); break;
+            case FLOAT: eat(Tag.FLOAT); break;
+            case CHAR: eat(Tag.CHAR); break;
             default: error();
         }
     }
@@ -119,7 +124,7 @@ public class Parser extends Reportable{
     void assign_stmt() throws IOException {
         switch(token.tag){
             // assign-stmt ::= identifier "=" simple_expr
-            case ID: eat(Tag.ID); eat(Tag.EQ); simple_expr(); break;
+            case ID: eat(Tag.ID); eat(Tag.ATB); simple_expr(); break;
             default: error();
         }
     }
@@ -269,7 +274,7 @@ public class Parser extends Reportable{
             case LE:
             case NEQ: break;
 
-            default: error();
+            default: break;
         }
     }
     void term() throws IOException {
@@ -306,7 +311,7 @@ public class Parser extends Reportable{
             case LE:
             case NEQ: break;
 
-            default: error();
+            default: break;
         }
     }
     void factor_a() throws IOException {
@@ -325,10 +330,10 @@ public class Parser extends Reportable{
     void factor() throws IOException {
         switch(token.tag){
             // factor ::= identifier | constant | "(" expression ")"
-            case ID: eat(Tag.ID);
+            case ID: eat(Tag.ID); break;
             case CINT:
             case CFLOAT:
-            case CCHAR: constant();
+            case CCHAR: constant(); break;
             case OP: eat(Tag.OP); expression(); eat(Tag.CP); break;
             default: error();
         }
