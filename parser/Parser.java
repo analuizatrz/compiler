@@ -25,17 +25,19 @@ public class Parser extends Reportable{
         if(token.tag == tag)
             advance();
         else
-            error();
+            error("quando se esperava" + tag.toString());
     }
     public void start() throws IOException{
         program();
     }
     void error() throws IOException{
-        System.out.println(token);
+        error("");
+    }
+    void error(String complement) throws IOException{
         if(token.tag == Tag.EOF)
             addMessage(ErrorType.UEOF, Lexer.line);
         else
-            addMessage(ErrorType.UNT, token.toString(), Lexer.line);
+            addMessage(ErrorType.UNT, token.toString() + complement, Lexer.line);
         advance();
     }
     void program() throws IOException {
@@ -103,7 +105,7 @@ public class Parser extends Reportable{
             case OUT:
                 stmt();
                 while(token.tag == Tag.SCL){
-                    eat(Tag.SCL); decl();
+                    eat(Tag.SCL); stmt();
                 }
                 break;
             default: error();

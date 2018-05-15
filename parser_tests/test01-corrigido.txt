@@ -8,8 +8,8 @@ begin
   x = 12.0;
   in(a);
   in(b);
-  in(c)
+  in(c);
   result = (a*b + 1) / (c+2);
-  out "Resultado: ";
+  out ("Resultado: ");
   out (result);
 end
