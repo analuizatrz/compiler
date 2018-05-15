@@ -35,7 +35,7 @@ public class Parser extends Reportable{
         if(token.tag == Tag.EOF)
             addMessage(ErrorType.UEOF, Lexer.line);
         else
-            addMessage(ErrorType.UNT, Lexer.line);
+            addMessage(ErrorType.UNT, token.toString(), Lexer.line);
         advance();
     }
     void program() throws IOException {

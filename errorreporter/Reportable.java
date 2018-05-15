@@ -8,7 +8,10 @@ public abstract class Reportable{
     private Messages template = new Messages();
 
     public void addMessage(ErrorType errorType, int line){
-        messages.add(template.get(errorType)+" na linha: "+line);
+        messages.add(template.get(errorType) + " na linha " + line);
+    }
+    public void addMessage(ErrorType errorType, String complement, int line){
+        messages.add(template.get(errorType) + ", " + complement + ", na linha " + line);
     }
     public int listErrors(){
         for (String message : messages)
