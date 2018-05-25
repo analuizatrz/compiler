@@ -1,7 +1,7 @@
-program
+program nome
   declare
     a, aux: int;
-    b: float;
+    b: float
   begin
     b = 0;
     in (a);
@@ -11,6 +11,6 @@ program
       b = a;
       a = aux
     end;
- out(a;
+ out(a);
  out(b)
 end

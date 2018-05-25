@@ -33,7 +33,7 @@ public class Compiler {
 		}while(scanned.tag != Tag.EOF /*&& scanned.tag != Tag.MFT && scanned.tag != Tag.UEOF*/); //interrupt if detect error or EOF
 		printSymbolTable(lexer);
 		if(lexer.listErrors() == 0)
-			System.out.println("Nenhum erro foi detectado, tokens identificados com sucesso");
+			System.out.println("\nNenhum erro foi detectado, tokens identificados com sucesso");
 
 	}
 	public static void parserAnalisys(String fileName)throws FileNotFoundException, IOException{
@@ -41,7 +41,7 @@ public class Compiler {
 		Parser parser = new Parser(lexer);
 		parser.start();
 		if(lexer.listErrors() == 0 && parser.listErrors() == 0)
-			System.out.println("Nenhum erro foi detectado");
+			System.out.println("\nNenhum erro foi detectado");
 	}
 	public static void main(String[] args) throws FileNotFoundException, IOException {
 		//lexerAnalisys(args[0]);

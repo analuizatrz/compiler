@@ -138,7 +138,7 @@ public class Parser extends Reportable{
     void if_stmt() throws IOException {
         switch(token.tag){
             // if-stmt ::= if condition then stmt-list if-stmt'
-            case ID: eat(Tag.IF); condition(); eat(Tag.THEN); stmt_list(); if_stmt_(); break;
+            case IF: eat(Tag.IF); condition(); eat(Tag.THEN); stmt_list(); if_stmt_(); break;
             default: error();
         }
     }

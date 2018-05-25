@@ -3,11 +3,12 @@ program teste2
     a, b, c:int;
     d, var: float
   begin
-  teste2 = 1;
-  in (a);
-  b = a * a;
-  c = b + a/2;
-  out c;
-  val := 34.2
-  c := val + 2.2;
-  out (val)
+    teste2 = 1;
+    in (a);
+    b = a * a;
+    c = b + a/2 * (35/b);
+    out(c);
+    val = 34.2;
+    c = val + 2.2;
+    out (val)
+  end
