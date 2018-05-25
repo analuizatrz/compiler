@@ -5,9 +5,6 @@ import errorreporter.Reportable;
 import lexer.Lexer;
 import lexer.Tag;
 import lexer.Token;
-import java.util.*;
-import java.util.concurrent.locks.Condition;
-import java.lang.*;
 import java.io.*;
 
 public class Parser extends Reportable{
@@ -22,16 +19,24 @@ public class Parser extends Reportable{
         token = lexer.scan();
     }
     void eat(Tag tag) throws IOException {
+        System.out.print(" "+ tag.toString()+" ");
         if(token.tag == tag)
             advance();
-        else
-            error("quando se esperava" + tag.toString());
+        else{
+            System.out.println();
+            error(" quando se esperava " + tag.toString());
+            listErrors();
+            System.exit(0);
+        }
     }
     public void start() throws IOException{
         program();
     }
     void error() throws IOException{
-        error("");
+        System.out.println();
+            error("");
+            listErrors();
+            System.exit(0);            
     }
     void error(String complement) throws IOException{
         if(token.tag == Tag.EOF)

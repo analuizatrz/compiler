@@ -6,7 +6,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; rm parser/*.class; javac Compiler.java; java Compiler parser_tests/test01-corrigido.txt ",
+            "command": "rm *.class; rm lexer/*.class; rm errorreporter/*.class; rm parser/*.class; javac Compiler.java; java Compiler parser_tests/test02-corrigido.txt ",
             "group": {
                 "kind": "build",
                 "isDefault": true

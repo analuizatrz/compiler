@@ -1,4 +1,5 @@
 package lexer;
+
 import java.io.*;
 import java.util.*;
 
@@ -87,8 +88,7 @@ public class Lexer extends Reportable{
 					continue;
 				}
 				else{
-					ch = '/';
-					break;
+					return new Token(Tag.DIV);
 				}
 			}
 			else break;
@@ -131,12 +131,9 @@ public class Lexer extends Reportable{
 				readch();
 				return new Token(Tag.MUL);
 
-			case '/':
-
-
-					readch();
-					return new Token(Tag.DIV);
-
+			// case '/':
+			// 	readch();
+			// 	return new Token(Tag.DIV);
 
 			case '&':
 				if (readch('&')) return Word.and;
@@ -189,7 +186,7 @@ public class Lexer extends Reportable{
 			w = new Word(s, Tag.ID);
 			words.put(s,w);
 			return w;
-			}
+		}
 
 			//const number
 			if(Character.isDigit(ch)){

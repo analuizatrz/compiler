@@ -1,7 +1,7 @@
 program teste2
   declare
     a, b, c:int;
-    d, var: float;
+    d, _ar: float;
 begin
   teste2 = 1;
   In (a);

@@ -11,5 +11,5 @@ begin
   in(c);
   result = (a*b + 1) / (c+2);
   out ("Resultado: ");
-  out (result);
+  out (result)
 end
