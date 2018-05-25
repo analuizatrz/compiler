@@ -184,6 +184,11 @@ public class Parser extends Reportable{
         }
     }
     void stmt_preffix() throws IOException {
+        switch(token.tag){
+            // stmt-prefix ::= while condition do
+            case WHILE: eat(Tag.WHILE); condition(); eat(Tag.DO); break;
+            default: error();
+        }
 
     }
     void read_stmt() throws IOException {
