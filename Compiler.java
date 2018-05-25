@@ -1,7 +1,5 @@
 import java.io.*;
 
-import errorreporter.Reportable;
-import errorreporter.*;
 import lexer.Lexer;
 import lexer.Token;
 import lexer.Tag;
