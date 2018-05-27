@@ -131,10 +131,6 @@ public class Lexer extends Reportable{
 				readch();
 				return new Token(Tag.MUL);
 
-			// case '/':
-			// 	readch();
-			// 	return new Token(Tag.DIV);
-
 			case '&':
 				if (readch('&')) return Word.and;
 				else{
@@ -256,9 +252,7 @@ public class Lexer extends Reportable{
 					readch(); //advance to next char
 					String s = sb.toString();
 					return new Cstring(s);
-
 			}
-
 			ch = ' ';
 			addMessage(ErrorType.MFT, line);
 			return new Token(Tag.MFT);

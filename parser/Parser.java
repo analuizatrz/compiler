@@ -19,7 +19,6 @@ public class Parser extends Reportable{
         token = lexer.scan();
     }
     void eat(Tag tag) throws IOException {
-        System.out.print(" "+ tag.toString()+" ");
         if(token.tag == tag)
             advance();
         else{
@@ -286,7 +285,7 @@ public class Parser extends Reportable{
             case LE:
             case NEQ: break;
 
-            default: break;
+            default: error();
         }
     }
     void term() throws IOException {
@@ -321,9 +320,12 @@ public class Parser extends Reportable{
             case GE:
             case LT:
             case LE:
-            case NEQ: break;
+            case NEQ:
+            case PLS:
+            case MNS:
+            case OR: break;
 
-            default: break;
+            default: error();
         }
     }
     void factor_a() throws IOException {
